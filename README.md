@@ -1,4 +1,5 @@
 # vue2-cli-test
+* 注：该项目是我个人用来测试功能效果的一个测试的项目
 
 ## Project setup
 ```
