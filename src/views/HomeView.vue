@@ -1,25 +1,25 @@
 <template>
-  <div>
-    <div id="component"></div>
+  <div class="home">
+    <lxs-components :lxsData="lxsData"></lxs-components>
   </div>
 </template>
 
 <script>
-import Component from '@/components/test/container.js';
+import lxsComponents from '@/components/lxsComponents.vue';
 export default {
+  name: 'home',
   data() {
     return {
-
-    }
+      lxsData: {
+        type: 1,
+        data: [],
+      }
+    };
   },
-  mounted() {
-    new Component({
-      id: 'component',
-      type: '1',
-      data: {},
-    });
+  components: {
+    lxsComponents
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

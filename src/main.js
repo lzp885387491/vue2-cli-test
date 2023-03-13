@@ -8,8 +8,13 @@ import '@/assets/css/main.css'
 import '@/assets/css/common.css'
 import './assets/lib/flexible'
 import 'element-ui/lib/theme-chalk/index.css';
-// import '@/conponents/test/container.css' 该文件为封装的动态创建dom布局框架的样式
-import '@/components/test/container.css'
+import 'video.js/dist/video-js.css'
+import Video from 'video.js'
+import video_zhCN from 'video.js/dist/lang/zh-CN.json'
+import video_en from 'video.js/dist/lang/en.json'
+
+Video.addLanguage('zh-CN', video_zhCN);
+Video.addLanguage('en', video_en);
 
 Vue.config.productionTip = false
 Vue.use(dataV)
