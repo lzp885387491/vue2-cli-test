@@ -4,18 +4,19 @@
             <div>
                 <div class="ml-5">
                     <!-- 2019年12月30日 晴：高温12℃~-1℃ -->
-                    {{ data.date + data.time }}
+                    {{ date }}
+                    {{ time }}
                 </div>
                 <dv-decoration-8 style="width:100%;height:3rem;display: inline-block; text-align: left;" />
             </div>
             <div>
                 <div class="fs-2 text_center fw-700">
-                    {{ data.title }}
+                    安全生产信息管理
                 </div>
                 <dv-decoration-5 style="width:32rem;height:3rem;margin: 0 auto;" />
             </div>
             <div class="text_right">
-                <div class="mr-5">{{ data.headerRightInfo }}</div>
+                <div class="mr-5">导航菜单</div>
                 <dv-decoration-8 :reverse="true" style="width:100%;height:3rem;display: inline-block; text-align: right;" />
             </div>
         </div>
@@ -25,9 +26,9 @@
                     <div class="box roll">
                         <div class="box_title">
                             <i class="c-35cee9 el-icon-d-arrow-right"></i>
-                            {{ data.leftTitle1 }}
+                            风险研判和安全承诺公告
                         </div>
-                        <div v-for="(item, index) in data.announcement" :key="index">
+                        <div v-for="(item, index) in safetyAnnouncement" :key="index">
                             <div class="title mtb-05">{{ item.title }}</div>
                             <div v-for="i in item.data" :key="i.id">
                                 <div class="c-b5b3b4 ptb-01">{{ i.txt }}</div>
@@ -40,7 +41,7 @@
                     <div class="box">
                         <div class="box_title">
                             <i class="c-35cee9 el-icon-d-arrow-right"></i>
-                            {{ data.leftTitle2 }}
+                            风险点统计
                         </div>
                         <div class="content flex-center">
                             <div class="left flex-center">
@@ -74,10 +75,10 @@
                     <div class="box">
                         <div class="box_title">
                             <i class="c-35cee9 el-icon-d-arrow-right"></i>
-                            {{ data.leftTitle3  }}
+                            风险点统计
                         </div>
                         <el-carousel trigger="click" height="18rem">
-                            <el-carousel-item v-for="(item, index) in data.swiperData" :key="index">
+                            <el-carousel-item v-for="(item, index) in carouselData" :key="index">
                                 <div class="small jc-sa">
                                     <div class="align-center" v-for="el in item" :key="el.id">
                                         <i class="fs-5 c-35cee9" :class="el.icon"></i>
@@ -99,10 +100,10 @@
                             <div>
                                 <div class="el-header-title">
                                     <i class="c-35cee9 el-icon-d-arrow-right"></i>
-                                    {{data.rightTitle}}
+                                    风险研判和安全承诺公告
                                 </div>
                                 <div class="nav mt-1">
-                                    <div v-for="item in data.navList" :key="item.id">
+                                    <div v-for="item in navList" :key="item.id">
                                         <button @click="setIsok(item.nav, item)" :class="item.isActive ? 'btn-active' : ''"
                                             class="flex-center">
                                             <span class="i mr-1"></span>
@@ -113,19 +114,19 @@
                             </div>
                         </el-header>
                         <el-main class="el-main-content">
-                            <div v-if="data.isShowView == 1">
+                            <div v-if="isok == 1">
                                 <riskFourColorDiagram />
                             </div>
-                            <div v-else-if="data.isShowView == 2">
+                            <div v-else-if="isok == 2">
                                 <hazardousOperationDistributionMap />
                             </div>
-                            <div v-else-if="data.isShowView == 3">
+                            <div v-else-if="isok == 3">
                                 <riskDistributionMap />
                             </div>
-                            <div v-else-if="data.isShowView == 4">
+                            <div v-else-if="isok == 4">
                                 <riskList />
                             </div>
-                            <div v-else-if="data.isShowView == 5">
+                            <div v-else-if="isok == 5">
                                 <twoMonadThreeCheckpost />
                             </div>
                         </el-main>
@@ -137,177 +138,167 @@
 </template>
 
 <script>
-import riskFourColorDiagram from '@/components/lxsFsLsv/children/riskFourColorDiagram.vue';
-import hazardousOperationDistributionMap from '@/components/lxsFsLsv/children/hazardousOperationDistributionMap.vue';
-import riskDistributionMap from '@/components/lxsFsLsv/children/riskDistributionMap.vue';
-import riskList from '@/components/lxsFsLsv/children/riskList.vue';
-import twoMonadThreeCheckpost from '@/components/lxsFsLsv/children/twoMonadThreeCheckpost.vue';
-import pieChart from '@/components/lxsFsLsv/children/pieChart.vue';
-import lxsBorder from '@/components/lxsFsLsv/children/border.vue';
+import riskFourColorDiagram from './riskFourColorDiagram.vue';
+import hazardousOperationDistributionMap from './hazardousOperationDistributionMap.vue';
+import riskDistributionMap from './riskDistributionMap.vue';
+import riskList from './riskList.vue';
+import twoMonadThreeCheckpost from './twoMonadThreeCheckpost.vue';
+import pieChart from './pieChart.vue';
+import lxsBorder from './border.vue'
 export default {
-    props: ['lxsData'],
     data() {
         return {
-            data: {
-                leftTitle1: '风险研判和安全承诺公告',
-                leftTitle2: '风险点统计',
-                leftTitle3: '风险点统计',
-                rightTitle:'风险研判和安全承诺公告',
-                announcement: [
-                    {
-                        id: 1,
-                        title: "企业状态",
-                        data: [
-                            {
-                                id: 1,
-                                txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
-                            },
-                            {
-                                id: 2,
-                                txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
-                            },
-                            {
-                                id: 3,
-                                txt: "是否处于试生产（否）"
-                            },
-                            {
-                                id: 4,
-                                txt: "是否处于开停车状态（是）"
-                            },
-                            {
-                                id: 5,
-                                txt: "重大危险源是否处于安全状态（是）"
-                            },
-                        ]
-                    },
-                    {
-                        id: 1,
-                        title: "企业承诺",
-                        data: [
-                            {
-                                id: 1,
-                                txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
-                            },
-                            {
-                                id: 2,
-                                txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
-                            },
-                            {
-                                id: 3,
-                                txt: "是否处于试生产（否）"
-                            },
-                            {
-                                id: 4,
-                                txt: "是否处于开停车状态（是）"
-                            },
-                            {
-                                id: 5,
-                                txt: "重大危险源是否处于安全状态（是）"
-                            },
-                        ]
-                    },
-                    {
-                        id: 1,
-                        title: "企业。。。",
-                        data: [
-                            {
-                                id: 1,
-                                txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
-                            },
-                            {
-                                id: 2,
-                                txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
-                            },
-                            {
-                                id: 3,
-                                txt: "是否处于试生产（否）"
-                            },
-                            {
-                                id: 4,
-                                txt: "是否处于开停车状态（是）"
-                            },
-                            {
-                                id: 5,
-                                txt: "重大危险源是否处于安全状态（是）"
-                            },
-                        ]
-                    },
-                ],
-                swiperData: [
-                    [
+            safetyAnnouncement: [
+                {
+                    id: 1,
+                    title: "企业状态",
+                    data: [
                         {
                             id: 1,
-                            icon: "el-icon-help",
-                            num: 11,
-                            text: "高危工艺"
+                            txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
                         },
                         {
                             id: 2,
-                            icon: "el-icon-s-home",
-                            num: 16,
-                            text: "储罐信息"
-                        }
-                    ],
-                    [
+                            txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
+                        },
+                        {
+                            id: 3,
+                            txt: "是否处于试生产（否）"
+                        },
+                        {
+                            id: 4,
+                            txt: "是否处于开停车状态（是）"
+                        },
+                        {
+                            id: 5,
+                            txt: "重大危险源是否处于安全状态（是）"
+                        },
+                    ]
+                },
+                {
+                    id: 1,
+                    title: "企业承诺",
+                    data: [
                         {
                             id: 1,
-                            icon: "el-icon-help",
-                            num: 11,
-                            text: "高危工艺"
+                            txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
                         },
                         {
                             id: 2,
-                            icon: "el-icon-s-home",
-                            num: 16,
-                            text: "储罐信息"
-                        }
-                    ],
-                ],
-                navList: [
+                            txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
+                        },
+                        {
+                            id: 3,
+                            txt: "是否处于试生产（否）"
+                        },
+                        {
+                            id: 4,
+                            txt: "是否处于开停车状态（是）"
+                        },
+                        {
+                            id: 5,
+                            txt: "重大危险源是否处于安全状态（是）"
+                        },
+                    ]
+                },
+                {
+                    id: 1,
+                    title: "企业。。。",
+                    data: [
+                        {
+                            id: 1,
+                            txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
+                        },
+                        {
+                            id: 2,
+                            txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
+                        },
+                        {
+                            id: 3,
+                            txt: "是否处于试生产（否）"
+                        },
+                        {
+                            id: 4,
+                            txt: "是否处于开停车状态（是）"
+                        },
+                        {
+                            id: 5,
+                            txt: "重大危险源是否处于安全状态（是）"
+                        },
+                    ]
+                },
+            ],
+            carouselData: [
+                [
                     {
                         id: 1,
-                        title: '风险四色图',
-                        nav: 1,
-                        isActive: false,
+                        icon: "el-icon-help",
+                        num: 11,
+                        text: "高危工艺"
                     },
                     {
                         id: 2,
-                        title: '危险作业分布图',
-                        nav: 2,
-                        isActive: false,
-                    },
-                    {
-                        id: 3,
-                        title: '风险分布图',
-                        nav: 3,
-                        isActive: false,
-                    },
-                    {
-                        id: 4,
-                        title: '风险清单',
-                        nav: 4,
-                        isActive: false,
-                    },
-                    {
-                        id: 5,
-                        title: '两单三卡',
-                        nav: 5,
-                        isActive: false,
-                    },
+                        icon: "el-icon-s-home",
+                        num: 16,
+                        text: "储罐信息"
+                    }
                 ],
-                isShowView: 5,// 1风险四色图  2危险作业分布图  3风险分布图   4风险清单   5两单三卡
-                isActive: true,
-                date: '',
-                time: '',
-                title: '安全成产信息管理',
-                headerRightInfo: '导航菜单',
-            },
+                [
+                    {
+                        id: 1,
+                        icon: "el-icon-help",
+                        num: 11,
+                        text: "高危工艺"
+                    },
+                    {
+                        id: 2,
+                        icon: "el-icon-s-home",
+                        num: 16,
+                        text: "储罐信息"
+                    }
+                ],
+            ],
+            isok: 5,// 1风险四色图  2危险作业分布图  3风险分布图   4风险清单   5两单三卡
+            isActive: true,
+            navList: [
+                {
+                    id: 1,
+                    title: '风险四色图',
+                    nav: 1,
+                    isActive: false,
+                },
+                {
+                    id: 2,
+                    title: '危险作业分布图',
+                    nav: 2,
+                    isActive: false,
+                },
+                {
+                    id: 3,
+                    title: '风险分布图',
+                    nav: 3,
+                    isActive: false,
+                },
+                {
+                    id: 4,
+                    title: '风险清单',
+                    nav: 4,
+                    isActive: false,
+                },
+                {
+                    id: 5,
+                    title: '两单三卡',
+                    nav: 5,
+                    isActive: false,
+                },
+            ],
+            date: '',
+            time: ''
         };
     },
     created() {
-        console.log(this.lxsData)
-        this.data.navList.forEach((item) => {
-            if (this.data.isShowView == item.id) {
+        this.navList.forEach((item) => {
+            if (this.isok == item.id) {
                 item.isActive = !item.isActive
             }
         })
@@ -324,8 +315,8 @@ export default {
     },
     methods: {
         setIsok(num, item) {
-            this.data.isShowView = num
-            this.data.navList.forEach(el => {
+            this.isok = num
+            this.navList.forEach(el => {
                 el.isActive = false;
                 if (el.id == item.id) {
                     el.isActive = true
@@ -347,8 +338,8 @@ export default {
             s = this.checkTime(s)
             let date = n + '年' + y + '月' + r + '日';
             let time = h + ':' + m + ':' + s;
-            this.data.date = date;
-            this.data.time = time;
+            this.date = date;
+            this.time = time;
             setTimeout(() => {
                 this.newDate();
             }, 1000)

@@ -9,6 +9,7 @@
   "dependencies": {
     "@jiaminghi/data-view": "^2.10.0",
     "core-js": "^3.8.3",
+    "echarts": "^5.4.1",
     "element-ui": "^2.15.13",
     "video.js": "^8.0.4",
     "videojs-contrib-hls": "^5.15.0",
