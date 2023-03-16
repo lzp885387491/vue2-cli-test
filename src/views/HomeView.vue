@@ -72,150 +72,212 @@ export default {
       // },
       lxsData: {
         type: 2,
-        announcement: [
-          {
-            id: 1,
-            title: "企业状态",
-            data: [
+        data: {
+          header: {
+            date: '',
+            time: '',
+            title: '安全成产信息管理',
+            rightInfo: '导航菜单',
+          },
+          isActive: true,
+          left1data: {
+            title: '风险研判和安全承诺公告',
+            children: [
               {
                 id: 1,
-                txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
+                title: "企业状态",
+                data: [
+                  {
+                    id: 1,
+                    txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
+                  },
+                  {
+                    id: 2,
+                    txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
+                  },
+                  {
+                    id: 3,
+                    txt: "是否处于试生产（否）"
+                  },
+                  {
+                    id: 4,
+                    txt: "是否处于开停车状态（是）"
+                  },
+                  {
+                    id: 5,
+                    txt: "重大危险源是否处于安全状态（是）"
+                  },
+                ]
               },
-              {
-                id: 2,
-                txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
-              },
-              {
-                id: 3,
-                txt: "是否处于试生产（否）"
-              },
-              {
-                id: 4,
-                txt: "是否处于开停车状态（是）"
-              },
-              {
-                id: 5,
-                txt: "重大危险源是否处于安全状态（是）"
-              },
-            ]
-          },
-          {
-            id: 1,
-            title: "企业承诺",
-            data: [
               {
                 id: 1,
-                txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
+                title: "企业承诺",
+                data: [
+                  {
+                    id: 1,
+                    txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
+                  },
+                  {
+                    id: 2,
+                    txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
+                  },
+                  {
+                    id: 3,
+                    txt: "是否处于试生产（否）"
+                  },
+                  {
+                    id: 4,
+                    txt: "是否处于开停车状态（是）"
+                  },
+                  {
+                    id: 5,
+                    txt: "重大危险源是否处于安全状态（是）"
+                  },
+                ]
               },
-              {
-                id: 2,
-                txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
-              },
-              {
-                id: 3,
-                txt: "是否处于试生产（否）"
-              },
-              {
-                id: 4,
-                txt: "是否处于开停车状态（是）"
-              },
-              {
-                id: 5,
-                txt: "重大危险源是否处于安全状态（是）"
-              },
-            ]
-          },
-          {
-            id: 1,
-            title: "企业。。。",
-            data: [
               {
                 id: 1,
-                txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
+                title: "企业。。。",
+                data: [
+                  {
+                    id: 1,
+                    txt: "生产装置（19）套，其中运行（14）套，停产（5）套，检修（0）套；"
+                  },
+                  {
+                    id: 2,
+                    txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
+                  },
+                  {
+                    id: 3,
+                    txt: "是否处于试生产（否）"
+                  },
+                  {
+                    id: 4,
+                    txt: "是否处于开停车状态（是）"
+                  },
+                  {
+                    id: 5,
+                    txt: "重大危险源是否处于安全状态（是）"
+                  },
+                ]
               },
-              {
-                id: 2,
-                txt: "特殊作业：特级动火（0）处;一级动火（0）处;二级动火（0）处；进入受限空间作业（0）处；"
-              },
-              {
-                id: 3,
-                txt: "是否处于试生产（否）"
-              },
-              {
-                id: 4,
-                txt: "是否处于开停车状态（是）"
-              },
-              {
-                id: 5,
-                txt: "重大危险源是否处于安全状态（是）"
-              },
-            ]
+            ],
           },
-        ],
-        swiperData: [
-          [
-            {
-              id: 1,
-              icon: "el-icon-help",
-              num: 11,
-              text: "高危工艺"
+          left2data: {
+            title: '风险点统计',
+            option: {
+              tooltip: {
+                trigger: 'item'
+              },
+              //饼图中各模块的颜色
+              color: ['#ff0000', '#001eff', '#fff000', '#ff7800', '#b7008e'],
+              series: [
+                {
+                  // name: 'Access From',
+                  type: 'pie',
+                  radius: '40%',
+                  data: [
+                    { value: 1210, name: '红色风险点' },
+                    { value: 900, name: '蓝色风险点' },
+                    { value: 780, name: '黄色风险点' },
+                    { value: 556, name: '橙色风险点' },
+                    { value: 235, name: '紫色风险点' }
+                  ],
+                  emphasis: {
+                    itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(255, 255, 255, 1)',
+                    }
+                  }
+                }
+              ]
             },
-            {
-              id: 2,
-              icon: "el-icon-s-home",
-              num: 16,
-              text: "储罐信息"
-            }
-          ],
-          [
-            {
-              id: 1,
-              icon: "el-icon-help",
-              num: 11,
-              text: "高危工艺"
-            },
-            {
-              id: 2,
-              icon: "el-icon-s-home",
-              num: 16,
-              text: "储罐信息"
-            }
-          ],
-        ],
-        navList: [
-          {
-            id: 1,
-            title: '风险四色图',
-            nav: 1,
-            isActive: false,
+            children: [
+              {
+                id: 1,
+                icon: 'el-icon-user',
+                num: 11,
+                text: '风险预警'
+              },
+              {
+                id: 2,
+                icon: 'el-icon-warning',
+                num: 1,
+                text: '当前隐患'
+              },
+            ]
           },
-          {
-            id: 2,
-            title: '危险作业分布图',
-            nav: 2,
-            isActive: false,
+          left3data: {
+            title: '风险点统计',
+            swiperData: [
+              [
+                {
+                  id: 1,
+                  icon: "el-icon-help",
+                  num: 11,
+                  text: "高危工艺"
+                },
+                {
+                  id: 2,
+                  icon: "el-icon-s-home",
+                  num: 16,
+                  text: "储罐信息"
+                }
+              ],
+              [
+                {
+                  id: 1,
+                  icon: "el-icon-help",
+                  num: 11,
+                  text: "高危工艺"
+                },
+                {
+                  id: 2,
+                  icon: "el-icon-s-home",
+                  num: 16,
+                  text: "储罐信息"
+                }
+              ],
+            ],
           },
-          {
-            id: 3,
-            title: '风险分布图',
-            nav: 3,
-            isActive: false,
+          rightData: {
+            isShowView: 5,// 1风险四色图  2危险作业分布图  3风险分布图   4风险清单   5两单三卡
+            title: '风险研判和安全承诺公告',
+            navList: [
+              {
+                id: 1,
+                title: '风险四色图',
+                nav: 1,
+                isActive: false,
+              },
+              {
+                id: 2,
+                title: '危险作业分布图',
+                nav: 2,
+                isActive: false,
+              },
+              {
+                id: 3,
+                title: '风险分布图',
+                nav: 3,
+                isActive: false,
+              },
+              {
+                id: 4,
+                title: '风险清单',
+                nav: 4,
+                isActive: false,
+              },
+              {
+                id: 5,
+                title: '两单三卡',
+                nav: 5,
+                isActive: false,
+              },
+            ],
           },
-          {
-            id: 4,
-            title: '风险清单',
-            nav: 4,
-            isActive: false,
-          },
-          {
-            id: 5,
-            title: '两单三卡',
-            nav: 5,
-            isActive: false,
-          },
-        ],
-        isShowView: 5,// 1风险四色图  2危险作业分布图  3风险分布图   4风险清单   5两单三卡
-        isActive: true,
+        }
       },
     };
   },
