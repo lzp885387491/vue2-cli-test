@@ -1,8 +1,8 @@
 <template>
     <div>
         <lxs-fs-formwork1 v-if="lxsData.type == 1" :lxsData="lxsData"></lxs-fs-formwork1>
-        <lxs-fs-formwork2 v-else-if="lxsData.type == 2" :lxsData="lxsData"></lxs-fs-formwork2>
-        <lxs-fs-formwork3 v-else-if="lxsData.type == 3" :lxsData="lxsData"></lxs-fs-formwork3>
+        <lxs-fs-formwork2 v-if="lxsData.type == 2" :lxsData="lxsData"></lxs-fs-formwork2>
+        <lxs-fs-formwork3 v-if="lxsData.type == 3" :lxsData="lxsData"></lxs-fs-formwork3>
     </div>
 </template>
 
@@ -18,9 +18,6 @@ export default {
         lxsFsFormwork1,
         lxsFsFormwork2,
         lxsFsFormwork3,
-    },
-    created() {
-        console.log('当前页面为第', this.lxsData.type, '个');
     },
 }
 </script>

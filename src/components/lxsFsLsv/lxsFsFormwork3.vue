@@ -6,7 +6,10 @@
 
 <script>
 export default {
-
+    props: ['lxsData'],
+    created(){
+        console.log(this.lxsData)
+    }
 }
 </script>
 
