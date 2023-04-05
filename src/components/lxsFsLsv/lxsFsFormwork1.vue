@@ -55,7 +55,7 @@
 <script>
 import videojs from 'video.js';
 export default {
-    name: 'lxsFsWebcam',
+    name: 'lxsFsFormwork1',
     props: ['lxsData'],
     data() {
         return {

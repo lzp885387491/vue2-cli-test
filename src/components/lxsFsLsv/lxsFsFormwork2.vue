@@ -137,6 +137,7 @@ import twoMonadThreeCheckpost from '@/components/lxsFsLsv/children/twoMonadThree
 import pieChart from '@/components/lxsFsLsv/children/pieChart.vue';
 import lxsBorder from '@/components/lxsFsLsv/children/border.vue';
 export default {
+    name:'lxsFsFormwork2',
     props: ['lxsData'],
     data() {
         return {
